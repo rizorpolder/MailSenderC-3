@@ -1,0 +1,40 @@
+﻿<Window x:Class="MailSenderGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MailSenderGUI"
+        mc:Ignorable="d"
+        Title="MailSender" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+        <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Menu">
+                <MenuItem>
+                    <MenuItem Header="Create"/>
+                    <MenuItem Header="Open"/>
+                    <MenuItem Header="Save"/>
+                    <Separator/>
+                    <MenuItem Header="Exit"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header ="Info"/>
+            
+                </Menu>
+            
+            </DockPanel>
+        <TabControl>
+                <TabItem Header="Sender">
+                    <StatusBar VerticalAlignment="Bottom" Width="100" Height="25">
+                        <TextBlock  Text="Не в сети" Foreground="Red"/>
+                    </StatusBar>
+                </TabItem>
+                <TabItem Header="Calendare"/>
+            <TabItem Header="Message"/>
+        </TabControl>
+
+        </StackPanel>
+       
+    </Grid>
+</Window>
