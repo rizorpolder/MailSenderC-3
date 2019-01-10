@@ -3,38 +3,137 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MailSenderGUI"
+        xmlns:l="clr-namespace:MailSenderGUI"
+        xmlns:lib="clr-namespace:MailSenderLib;assembly=MailSenderLib"
         mc:Ignorable="d"
-        Title="MailSender" Height="450" Width="800">
-    <Grid>
-        <StackPanel>
-        <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Menu">
-                <MenuItem>
-                    <MenuItem Header="Create"/>
-                    <MenuItem Header="Open"/>
-                    <MenuItem Header="Save"/>
-                    <Separator/>
-                    <MenuItem Header="Exit"/>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header ="Info"/>
-            
-                </Menu>
-            
-            </DockPanel>
-        <TabControl>
-                <TabItem Header="Sender">
-                    <StatusBar VerticalAlignment="Bottom" Width="100" Height="25">
-                        <TextBlock  Text="Не в сети" Foreground="Red"/>
-                    </StatusBar>
-                </TabItem>
-                <TabItem Header="Calendare"/>
-            <TabItem Header="Message"/>
-        </TabControl>
+        Title="MailSender" 
+        Height="450" Width="800">
+   <DockPanel>
+       <Menu DockPanel.Dock="Top">
+           <MenuItem Header="File">
+               <MenuItem Header="Open"/>
+               <MenuItem Header="Save"/>
+               <MenuItem Header="Print"/>
+<Separator/>
+               <MenuItem Header="Exit" Click="OnExitClick"/>
 
-        </StackPanel>
-       
-    </Grid>
+</MenuItem>
+           <MenuItem Header="Help"/>
+       </Menu>
+       <StatusBar DockPanel.Dock="Bottom">
+           <TextBlock>Ready!</TextBlock>
+       </StatusBar>
+        <TabControl Name="MainTabControl">
+            <TabItem  Header="Группы рассылки">
+               <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                   </Grid.RowDefinitions>
+                    <!--
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Email"
+                      SelectedValue=""
+                   -->
+                   <ToolBarTray Grid.Row="0">
+                       <ToolBar>
+                         <TextBlock Text="Отправители" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                           <ComboBox Width="150" SelectedIndex="0" ItemsSource="{x:Static lib:Senders.Items}">
+                               <ComboBox.ItemTemplate>
+                                   <DataTemplate DataType="lib:Sender">
+                                        <StackPanel>
+                                            <TextBlock>
+                                           Имя: <TextBlock Text="{Binding Name}"/>
+                                            </TextBlock>
+                                            <TextBlock>
+                                           eMail:<TextBlock Text="{Binding Email}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                   </DataTemplate>
+                               </ComboBox.ItemTemplate>
+                           </ComboBox>
+
+
+                           <Button ToolTip="Добавить">
+                               <StackPanel Orientation="Horizontal">
+                                    <Image />
+                                    <!--Source="" Height= " "-->
+                                    <!--Source="" Height= " "-->
+                                    <TextBlock Text="Добавить"/>
+                               </StackPanel>
+                           </Button>
+                           <Button ToolTip="Удалить " Content="Удалить"/>
+                           <Button ToolTip="Редактировать" Content="Редактировать"/>
+                       </ToolBar>
+                       <ToolBar Band="1" BandIndex="0">
+                           <TextBlock Text="Сервера" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                           <ComboBox Width="150"/>
+                           <Button ToolTip="Добавить">
+                               <StackPanel Orientation="Horizontal">
+                                   <Image />
+                                   <!--Source="" Height= " "-->
+                                   <!--Source="" Height= " "-->
+                                   <TextBlock Text="Добавить"/>
+                               </StackPanel>
+                           </Button>
+                           <Button ToolTip="Удалить" Content="Удалить"/>
+                           <Button ToolTip="Редактировать" Content="Редактировать"/>
+                       </ToolBar>
+                       <ToolBar Band="0" BandIndex="1">
+                           <Button Click="GoToPlannerButton">
+                               <StackPanel Orientation="Horizontal">
+                                   <Image/>
+                                   <TextBlock Text ="Перейти в планировщик"/>
+                               </StackPanel>
+                           </Button>
+
+                       </ToolBar>
+                       <ToolBar Band="1">
+                           <TextBlock VerticalAlignment="Center" Text="Список адресов"/>
+                       </ToolBar>
+                    </ToolBarTray>
+<GroupBox Grid.Row="1" Header="Группы" >
+                        <DataGrid/>
+
+</GroupBox>
+
+               </Grid>
+           </TabItem>
+           <TabItem Name="TimePlannerTab" Header="Планировщик">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel>
+                        <TextBlock Text="Дата"/>
+                        <Calendar SelectionMode="MultipleRange"/>
+                        <TextBlock Text="Время"/>
+                        <TextBox />
+                        <Button Content="Запланировать"/>
+                        <Button Content="Отправить немедленно"/>
+                    </StackPanel>
+                    <GroupBox Grid.Column="1" Header="Список расписания">
+                        <ItemsControl/>
+                    </GroupBox>
+                </Grid>
+           </TabItem>
+            <TabItem Header="Редактор писем">
+                <Grid >
+                    <RichTextBox/>
+                </Grid>
+            </TabItem>
+            <TabItem IsEnabled="False">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox  Content="123"/>
+                        <TextBlock Text="Статистика"/>
+                    </StackPanel>
+                </TabItem.Header>
+           </TabItem> 
+
+        </TabControl>
+   </DockPanel>
+
 </Window>

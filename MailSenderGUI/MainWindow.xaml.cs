@@ -13,41 +13,51 @@ namespace MailSenderGUI
             InitializeComponent();
         }
 
-        private void SendButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (var email = new MailMessage("email@emalli.com", "email@email.com"))
-                {
-                    email.Subject = "Theme message";
-                    email.Body = "Body message";
+        //private void SendButton_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        using (var email = new MailMessage("email@emalli.com", "email@email.com"))
+        //        {
+        //            email.Subject = "Theme message";
+        //            email.Body = "Body message";
 
-                    using (var client = new SmtpClient("smt.gmail.com", 465))
-                    {
-                        var user = UsernameTextBox.Text;
-                        var password = Password.SecurePassword;
-                        client.Credentials = new NetworkCredential(user, password);
-                        client.EnableSsl = true;
+        //            using (var client = new SmtpClient("smt.gmail.com", 465))
+        //            {
+        //                var user = UsernameTextBox.Text;
+        //                var password = Password.SecurePassword;
+        //                client.Credentials = new NetworkCredential(user, password);
+        //                client.EnableSsl = true;
 
-                        client.Send(email);
-                    }
-                }
+        //                client.Send(email);
+        //            }
+        //        }
                 
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message, "Error!", 
-                    MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        MessageBox.Show(error.Message, "Error!", 
+        //            MessageBoxButton.OK, MessageBoxImage.Error);
+        //        return;
+        //    }
 
             //MessageBox.Show("Почта отправлена", "MailSender", 
             //    MessageBoxButton.OK, MessageBoxImage.Information);
 
-        var dlg=  new SendCompleteDialog();
-            dlg.Owner = this;
-            dlg.ShowDialog();
+        //var dlg=  new SendCompleteDialog();
+        //    dlg.Owner = this;
+        //    dlg.ShowDialog();
 
+        
+
+        private void OnExitClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void GoToPlannerButton(object sender, RoutedEventArgs e)
+        {
+            MainTabControl.SelectedItem = TimePlannerTab;
         }
     }
 }
