@@ -8,6 +8,7 @@ namespace MailSenderLib
 {
     public class DBClass
     {
-
+        private readonly RecepientsDataContext _Rcepients = new RecepientsDataContext();
+        public IQueryable<Recepient> Recepients => _Rcepients.Recepient;
     }
 }

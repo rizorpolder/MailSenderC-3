@@ -92,10 +92,24 @@
                            <TextBlock VerticalAlignment="Center" Text="Список адресов"/>
                        </ToolBar>
                     </ToolBarTray>
-<GroupBox Grid.Row="1" Header="Группы" >
-                        <DataGrid/>
+                    <GroupBox Grid.Row="1" Header="Группы">
+                        <GroupBox.Resources>
+                            <lib:DBClass x:Key="DataBaseObject"></lib:DBClass>
+                        </GroupBox.Resources>
+                        <DataGrid ItemsSource="{Binding Recepients, Source={StaticResource DataBaseObject}}" AutoGenerateColumns="False" HorizontalGridLinesBrush="{x:Null}"
+                                  AlternatingRowBackground="LightBlue">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="#" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="#" Binding="{Binding Email}"/>
+                                <DataGridTextColumn Header="#" Binding="{Binding Comment}"/>
 
-</GroupBox>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+
+                    </GroupBox>
 
                </Grid>
            </TabItem>
