@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:l="clr-namespace:MailSenderGUI"
         xmlns:lib="clr-namespace:MailSenderLib;assembly=MailSenderLib"
+        xmlns:cx="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MailSender" 
+        DataContext ="{Binding MainWindow, Source={StaticResource Locator}}"
+        Title="{Binding Title}" 
         Height="450" Width="800">
    <DockPanel>
        <Menu DockPanel.Dock="Top">
@@ -55,15 +58,19 @@
 
 
                            <Button ToolTip="Добавить">
-                               <StackPanel Orientation="Horizontal">
-                                    <Image />
                                     <!--Source="" Height= " "-->
-                                    <!--Source="" Height= " "-->
-                                    <TextBlock Text="Добавить"/>
-                               </StackPanel>
+                                <fa:ImageAwesome Height="16" Width="20" Icon="Plus" Foreground="Lime"/>
                            </Button>
-                           <Button ToolTip="Удалить " Content="Удалить"/>
-                           <Button ToolTip="Редактировать" Content="Редактировать"/>
+                            <Button ToolTip="Удалить " >
+                                <StackPanel>
+                                <fa:ImageAwesome Height="16" Width="20" Icon="Minus" Foreground="Red"/>
+                                </StackPanel>
+                            </Button>
+                           <Button ToolTip="Редактировать">
+                               <StackPanel>
+                                   <fa:ImageAwesome Height="16" Width="20" Icon="Pencil" Foreground="Gray"/>
+                               </StackPanel>
+                            </Button>
                        </ToolBar>
                        <ToolBar Band="1" BandIndex="0">
                            <TextBlock Text="Сервера" VerticalAlignment="Center" Margin="0,0,3,0"/>
@@ -93,11 +100,12 @@
                        </ToolBar>
                     </ToolBarTray>
                     <GroupBox Grid.Row="1" Header="Группы">
-                        <GroupBox.Resources>
-                            <lib:DBClass x:Key="DataBaseObject"></lib:DBClass>
-                        </GroupBox.Resources>
-                        <DataGrid ItemsSource="{Binding Recepients, Source={StaticResource DataBaseObject}}" AutoGenerateColumns="False" HorizontalGridLinesBrush="{x:Null}"
-                                  AlternatingRowBackground="LightBlue">
+                       
+                        <DataGrid ItemsSource="{Binding Recepients}"  
+                                  AutoGenerateColumns="False" 
+                                  HorizontalGridLinesBrush="{x:Null}"
+                                  AlternatingRowBackground="LightBlue"
+                                  IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Header="#" Binding="{Binding Name}"/>
@@ -124,7 +132,7 @@
                         <TextBlock Text="Дата"/>
                         <Calendar SelectionMode="MultipleRange"/>
                         <TextBlock Text="Время"/>
-                        <TextBox />
+                        <cx:DateTimePicker/>
                         <Button Content="Запланировать"/>
                         <Button Content="Отправить немедленно"/>
                     </StackPanel>

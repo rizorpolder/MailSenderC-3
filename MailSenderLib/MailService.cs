@@ -26,7 +26,8 @@ namespace MailSenderLib
 
         public MailService(string User, string Password)
         {
-            (_login, _password) = (User, Password);
+            _login = User;
+            _password = Password;
         }
 
         public void SendMail(string Mail, string Name)
